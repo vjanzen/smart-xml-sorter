@@ -25,7 +25,7 @@ This extension requires **Python 3** (`python3` in system PATH).
 
 ## Configuration
 
-You can customize the following settings in your VS Code settings:
+You can customize the following settings in your VS Code (fork) settings:
 
 * `xmlSorter.indent`: Number of spaces for indentation (Default: `4`).
 * `xmlSorter.sortKeys`: A comma-separated priority list of attributes used to distinguish identical tags (Default: `"id,name,key"`).
