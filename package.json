@@ -1,0 +1,62 @@
+{
+  "name": "smart-xml-sorter",
+  "displayName": "Smart XML Sorter",
+  "description": "Sortiert XML-Dateien rekursiv nach Tags und Attributen, während Kommentare und Formatierung erhalten bleiben.",
+  "version": "0.0.1",
+  "icon": "icon.png",
+  "publisher": "vjanzen",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Formatters",
+    "Utilities"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      {
+        "command": "smart-xml-sorter.sortActiveEditor",
+        "title": "Smart XML Sorter: XML sortieren"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "smart-xml-sorter.sortActiveEditor",
+        "key": "ctrl+alt+x",
+        "mac": "cmd+alt+x",
+        "when": "editorTextFocus && editorLangId == xml"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "smart-xml-sorter.sortActiveEditor",
+          "when": "editorLangId == xml",
+          "group": "1_modification"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Smart XML Sorter",
+      "properties": {
+        "xmlSorter.indent": {
+          "type": "integer",
+          "default": 4,
+          "description": "Einrückungstiefe in Leerzeichen für das sortierte XML."
+        },
+        "xmlSorter.sortKeys": {
+          "type": "string",
+          "default": "id,name,key",
+          "description": "Kommagetrennte Prioritätsliste von Attributen zur Unterscheidung gleicher XML-Tags."
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vjanzen/smart-xml-sorter"
+  },
+  "license": "MIT"
+}
