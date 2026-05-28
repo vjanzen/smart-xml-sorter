@@ -1,35 +1,35 @@
 # Smart XML Sorter
 
-Eine leistungsstarke IDE-Erweiterung für Antigravity (VS Code), die XML-Dateien rekursiv nach Tags und Attributen sortiert, während Kommentare (`<!-- ... -->`) und ursprüngliche Einrückungen erhalten bleiben.
+A powerful IDE extension for Antigravity (VS Code) that recursively sorts XML files by tags and attributes while preserving comments (`<!-- ... -->`) and original formatting.
 
-## Funktionen
+## Features
 
-* **Rekursive Sortierung:** Sortiert alle Kindelemente rekursiv alphabetisch nach ihren XML-Tag-Namen.
-* **Sekundäre Sortierschlüssel:** Bei gleichen Tag-Namen wird nach konfigurierbaren Schlüsselattributen (z. B. `id`, `name`, `key`) sortiert.
-* **Alphabetische Attribute:** Sortiert die Attribute innerhalb jedes XML-Elements alphabetisch.
-* **Kommentarerhalt:** Kommentare bleiben fest an ihre nachfolgenden Elemente gekoppelt und werden beim Sortieren mitverschoben.
-* **Einstellbare Einrückung:** Pretty-Printing mit konfigurierbarer Einrückungstiefe.
-* **Arbeitet in-place:** Aktualisiert das aktive Editor-Fenster direkt, was vollständigen Undo/Redo-Support ermöglicht.
+* **Recursive Sorting:** Recursively sorts all child elements alphabetically by their XML tag names.
+* **Secondary Sort Keys:** For elements with identical tag names, sorting is resolved using configurable priority attributes (e.g., `id`, `name`, `key`).
+* **Alphabetical Attributes:** Alphabetically sorts the attributes within each XML element.
+* **Comment Preservation:** Comments remain bound to their succeeding elements and are moved with them during sorting.
+* **Adjustable Indentation:** Pretty-printing with configurable indentation depth.
+* **Works In-Place:** Directly updates the active editor window, allowing full undo/redo support.
 
-## Systemvoraussetzungen
+## System Requirements
 
-Diese Erweiterung benötigt **Python 3** (`python3` im System-PATH).
+This extension requires **Python 3** (`python3` in system PATH).
 
-## Benutzung
+## Usage
 
-1. Öffnen Sie eine beliebige XML-Datei.
-2. Führen Sie die Sortierung auf einem der folgenden Wege aus:
-   * **Kontextmenü:** Klicken Sie mit der rechten Maustaste in den Editor und wählen Sie **"Smart XML Sorter: XML sortieren"**.
-   * **Tastaturkurzbefehl:** Drücken Sie `Cmd+Alt+X` (macOS) oder `Ctrl+Alt+X` (Windows/Linux).
-   * **Befehlspalette:** Öffnen Sie die Befehlspalette (`Cmd+Shift+P` / `Ctrl+Shift+P`) und suchen Sie nach **"Smart XML Sorter: XML sortieren"**.
+1. Open any XML file.
+2. Trigger the sorting using one of the following methods:
+   * **Context Menu:** Right-click in the editor and select **"Smart XML Sorter: Sort XML"**.
+   * **Keyboard Shortcut:** Press `Cmd+Alt+X` (macOS) or `Ctrl+Alt+X` (Windows/Linux).
+   * **Command Palette:** Open the command palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) and search for **"Smart XML Sorter: Sort XML"**.
 
-## Konfiguration
+## Configuration
 
-Sie können folgende Einstellungen in den VS Code-Einstellungen anpassen:
+You can customize the following settings in your VS Code settings:
 
-* `xmlSorter.indent`: Anzahl der Leerzeichen für die Einrückung (Standard: `4`).
-* `xmlSorter.sortKeys`: Kommagetrennte Prioritätsliste von Attributen zur Unterscheidung gleicher Tags (Standard: `"id,name,key"`).
+* `xmlSorter.indent`: Number of spaces for indentation (Default: `4`).
+* `xmlSorter.sortKeys`: A comma-separated priority list of attributes used to distinguish identical tags (Default: `"id,name,key"`).
 
-## Lizenz
+## License
 
-MIT Lizenz
+MIT License
