@@ -2,7 +2,7 @@
   "name": "smart-xml-sorter",
   "displayName": "Smart XML Sorter",
   "description": "Sortiert XML-Dateien rekursiv nach Tags und Attributen, während Kommentare und Formatierung erhalten bleiben.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "icon": "icon.png",
   "publisher": "vjanzen",
   "engines": {
