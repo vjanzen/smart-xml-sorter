@@ -12,6 +12,9 @@
     "Formatters",
     "Utilities"
   ],
+  "scripts": {
+    "package": "vsce package"
+  },
   "main": "./extension.js",
   "activationEvents": [],
   "contributes": {
