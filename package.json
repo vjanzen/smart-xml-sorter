@@ -13,7 +13,7 @@
     "Utilities"
   ],
   "scripts": {
-    "package": "vsce package"
+    "package": "npx @vscode/vsce package"
   },
   "main": "./extension.js",
   "activationEvents": [],
@@ -53,6 +53,11 @@
           "type": "string",
           "default": "id,name,key",
           "description": "Kommagetrennte Prioritätsliste von Attributen zur Unterscheidung gleicher XML-Tags."
+        },
+        "xmlSorter.pythonPath": {
+          "type": "string",
+          "default": "",
+          "description": "Optionaler Pfad zum Python-Interpreter (z. B. /usr/bin/python3 oder C:\\Python\\python.exe). Wenn leer, wird automatisch nach Python im System-PATH gesucht."
         }
       }
     }

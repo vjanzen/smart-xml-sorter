@@ -32,6 +32,7 @@ function activate(context) {
         const config = vscode.workspace.getConfiguration('xmlSorter');
         const indent = config.get('indent', 4);
         const sortKeys = config.get('sortKeys', 'id,name,key');
+        const pythonPath = config.get('pythonPath', '');
 
         const args = [
             pythonScriptPath,
@@ -40,28 +41,86 @@ function activate(context) {
             '--sort-keys', sortKeys
         ];
 
-        // Spawn Python process
-        const process = cp.spawn('python3', args);
+        // Determine list of commands to try
+        let commandsToTry = [];
+        if (pythonPath && pythonPath.trim()) {
+            commandsToTry.push(pythonPath.trim());
+        }
+        if (process.platform === 'win32') {
+            commandsToTry.push('python', 'python3', 'py');
+        } else {
+            commandsToTry.push('python3', 'python');
+        }
 
-        let sortedXml = '';
-        let errorMsg = '';
+        function trySpawnPython(commands) {
+            return new Promise((resolve, reject) => {
+                if (commands.length === 0) {
+                    return reject(new Error('Kein Python-Interpreter im System-PATH gefunden. Bitte installieren Sie Python 3 und stellen Sie sicher, dass es in Ihrem PATH verfügbar ist oder konfigurieren Sie den Pfad in den Einstellungen ("xmlSorter.pythonPath").'));
+                }
 
-        process.stdout.on('data', (data) => {
-            sortedXml += data.toString();
-        });
+                const cmd = commands[0];
+                let childProcess;
+                try {
+                    childProcess = cp.spawn(cmd, args, {
+                        env: { ...process.env, PYTHONIOENCODING: 'utf-8' }
+                    });
+                } catch (err) {
+                    // Try next command immediately if synchronous launch fails
+                    return resolve(trySpawnPython(commands.slice(1)));
+                }
 
-        process.stderr.on('data', (data) => {
-            errorMsg += data.toString();
-        });
+                let stdout = '';
+                let stderr = '';
+                let isFallbackTriggered = false;
 
-        process.on('error', (err) => {
-            vscode.window.showErrorMessage(
-                `Konnte das Python-Skript nicht ausführen. Bitte stellen Sie sicher, dass Python 3 ('python3') auf Ihrem System installiert und im PATH verfügbar ist. Fehler: ${err.message}`
-            );
-        });
+                childProcess.stdout.on('data', (data) => {
+                    stdout += data.toString();
+                });
 
-        process.on('close', (code) => {
-            if (code === 0) {
+                childProcess.stderr.on('data', (data) => {
+                    stderr += data.toString();
+                });
+
+                childProcess.on('error', (err) => {
+                    if (err.code === 'ENOENT') {
+                        isFallbackTriggered = true;
+                        resolve(trySpawnPython(commands.slice(1)));
+                    } else {
+                        reject(err);
+                    }
+                });
+
+                childProcess.on('close', (code) => {
+                    if (isFallbackTriggered) {
+                        return;
+                    }
+                    if (code === 0) {
+                        resolve(stdout);
+                    } else {
+                        const errMsg = stderr.trim() || `Prozess beendet mit Code ${code}`;
+                        reject(new Error(errMsg));
+                    }
+                });
+
+                childProcess.stdin.on('error', (err) => {
+                    if (!isFallbackTriggered) {
+                        console.error('Python stdin error:', err);
+                    }
+                });
+
+                try {
+                    childProcess.stdin.write(xmlText);
+                    childProcess.stdin.end();
+                } catch (err) {
+                    if (!isFallbackTriggered) {
+                        reject(err);
+                    }
+                }
+            });
+        }
+
+        trySpawnPython(commandsToTry)
+            .then((sortedXml) => {
                 // Apply the sorted XML back to the active editor
                 editor.edit((editBuilder) => {
                     const fullRange = new vscode.Range(
@@ -76,14 +135,10 @@ function activate(context) {
                         vscode.window.showErrorMessage('Fehler beim Aktualisieren des Editors.');
                     }
                 });
-            } else {
-                vscode.window.showErrorMessage(`Fehler beim Sortieren des XML: ${errorMsg || 'Unbekannter Python-Fehler.'}`);
-            }
-        });
-
-        // Write active document content to Python's stdin
-        process.stdin.write(xmlText);
-        process.stdin.end();
+            })
+            .catch((err) => {
+                vscode.window.showErrorMessage(`Fehler beim Sortieren des XML: ${err.message}`);
+            });
     });
 
     context.subscriptions.push(disposable);

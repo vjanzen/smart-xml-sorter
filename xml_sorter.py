@@ -93,6 +93,14 @@ def sort_element_recursive(elem, sort_keys):
             elem.append(child)
 
 def main():
+    # Reconfigure streams to use UTF-8 to prevent encoding issues on Windows
+    for stream in (sys.stdin, sys.stdout, sys.stderr):
+        if hasattr(stream, 'reconfigure'):
+            try:
+                stream.reconfigure(encoding='utf-8')
+            except Exception:
+                pass
+
     parser = argparse.ArgumentParser(description="Smart XML Sorter - CLI Tool")
     parser.add_argument("input_file", nargs="?", default="-", help="Input XML file path (default: '-' for stdin)")
     parser.add_argument("-o", "--output", help="Output file path (default: stdout)")
