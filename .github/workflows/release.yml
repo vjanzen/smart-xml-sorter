@@ -38,8 +38,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_AUTHOR_NAME: "Volker Janzen"
           GIT_AUTHOR_EMAIL: "volker.janzen@gmail.com"
-          GIT_COMMITTER_NAME: "Volker Janzen"
-          GIT_COMMITTER_EMAIL: "volker.janzen@gmail.com"
+          GIT_COMMITTER_NAME: "Gemini"
+          GIT_COMMITTER_EMAIL: "gemini@google.com"
           # Falls Sie später direkt im VS Code Marketplace publizieren möchten,
           # entkommentieren Sie diese Zeile und hinterlegen Sie das Secret:
           # VSCE_PAT: ${{ secrets.VSCE_PAT }}
