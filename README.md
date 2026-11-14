@@ -75,6 +75,12 @@ You can customize the following settings in your VS Code (fork) settings:
 
 ## Changelog
 
+### [1.2.0](https://github.com/vjanzen/smart-xml-sorter/compare/v1.1.0...v1.2.0) (2026-11-14)
+
+#### Features
+
+* add bilingual localization (EN/DE), unit tests, and automated VSIX packaging ([d35df9d](https://github.com/vjanzen/smart-xml-sorter/commit/d35df9dd8c1f8fea9db222da877e920207c9752d))
+
 ### [1.1.0](https://github.com/vjanzen/smart-xml-sorter/compare/v1.0.0...v1.1.0) (2026-06-16)
 
 #### Features
