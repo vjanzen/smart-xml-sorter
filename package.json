@@ -2,7 +2,7 @@
   "name": "smart-xml-sorter",
   "displayName": "Smart XML Sorter",
   "description": "%extension.description%",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "icon": "icon.png",
   "publisher": "vjanzen",
   "engines": {

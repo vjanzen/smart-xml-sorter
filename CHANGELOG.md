@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/vjanzen/smart-xml-sorter/compare/v1.2.0...v1.2.1) (2026-11-14)
+
+
+### Bug Fixes
+
+* configure Gemini as co-author and committer for automated releases ([cabadf2](https://github.com/vjanzen/smart-xml-sorter/commit/cabadf2f6a1c1aaf0d1faae2219198f0e375ca27))
+
 # [1.2.0](https://github.com/vjanzen/smart-xml-sorter/compare/v1.1.0...v1.2.0) (2026-11-14)
 
 
