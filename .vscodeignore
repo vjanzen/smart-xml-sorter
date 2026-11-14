@@ -1,0 +1,14 @@
+.vscode/**
+.github/**
+.gitignore
+.releaserc.json
+package-lock.json
+node_modules/**
+__pycache__/**
+*.pyc
+test_*.py
+DEVELOPMENT.md
+scripts/**
+dist/**
+*.vsix
+.DS_Store

@@ -1,0 +1,7 @@
+{
+  "extension.description": "Recursively sorts XML files by tags and attributes while preserving comments and formatting.",
+  "command.sortActiveEditor.title": "Smart XML Sorter: Sort XML",
+  "config.indent.description": "Indentation depth in spaces for the sorted XML.",
+  "config.sortKeys.description": "Comma-separated priority list of attributes used to distinguish identical XML tags.",
+  "config.pythonPath.description": "Optional path to the Python interpreter (e.g., /usr/bin/python3 or C:\\Python\\python.exe). When empty, Python is automatically searched in the system PATH."
+}

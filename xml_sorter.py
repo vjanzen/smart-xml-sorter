@@ -124,6 +124,8 @@ def main():
             sys.stderr.write(f"Error reading input file: {e}\n")
             sys.exit(1)
 
+    xml_content = xml_content.lstrip("\ufeff")
+
     if not xml_content.strip():
         sys.stderr.write("Error: XML content is empty.\n")
         sys.exit(1)
@@ -133,7 +135,10 @@ def main():
     try:
         ns_parser = ET.iterparse(io.BytesIO(xml_content.encode("utf-8")), events=['start-ns'])
         for _, (prefix, uri) in ns_parser:
-            ET.register_namespace(prefix, uri)
+            try:
+                ET.register_namespace(prefix, uri)
+            except ValueError:
+                pass
     except Exception:
         pass
 

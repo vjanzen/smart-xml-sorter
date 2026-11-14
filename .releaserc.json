@@ -3,18 +3,28 @@
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
-    "@semantic-release/changelog",
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogTitle": "# Changelog"
+      }
+    ],
     [
       "semantic-release-vsce",
       {
-        "packageVsix": true,
+        "packageVsix": "dist/smart-xml-sorter.vsix",
         "publish": false
       }
     ],
     [
       "@semantic-release/git",
       {
-        "assets": ["package.json", "CHANGELOG.md"],
+        "assets": [
+          "package.json",
+          "CHANGELOG.md",
+          "README.md",
+          "dist/smart-xml-sorter.vsix"
+        ],
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ],
@@ -22,7 +32,10 @@
       "@semantic-release/github",
       {
         "assets": [
-          {"path": "*.vsix", "label": "VSIX Extension Package"}
+          {
+            "path": "dist/smart-xml-sorter.vsix",
+            "label": "VSIX Extension Package"
+          }
         ]
       }
     ]

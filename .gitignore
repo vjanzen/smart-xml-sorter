@@ -5,9 +5,9 @@ jspm_packages/
 
 # Build outputs
 target/
-dist/
 out/
 *.vsix
+!dist/smart-xml-sorter.vsix
 
 # Python-spezifisch
 __pycache__/

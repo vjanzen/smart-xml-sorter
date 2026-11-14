@@ -1,7 +1,7 @@
 {
   "name": "smart-xml-sorter",
   "displayName": "Smart XML Sorter",
-  "description": "Sortiert XML-Dateien rekursiv nach Tags und Attributen, während Kommentare und Formatierung erhalten bleiben.",
+  "description": "%extension.description%",
   "version": "1.1.0",
   "icon": "icon.png",
   "publisher": "vjanzen",
@@ -13,7 +13,9 @@
     "Utilities"
   ],
   "scripts": {
-    "package": "npx @vscode/vsce package"
+    "vscode:prepublish": "node scripts/sync_changelog.js",
+    "package": "npx @vscode/vsce package --out dist/smart-xml-sorter.vsix",
+    "test": "python3 -m unittest discover -s . -p \"test_*.py\" -v"
   },
   "main": "./extension.js",
   "activationEvents": [],
@@ -21,7 +23,7 @@
     "commands": [
       {
         "command": "smart-xml-sorter.sortActiveEditor",
-        "title": "Smart XML Sorter: XML sortieren"
+        "title": "%command.sortActiveEditor.title%"
       }
     ],
     "keybindings": [
@@ -47,17 +49,17 @@
         "xmlSorter.indent": {
           "type": "integer",
           "default": 4,
-          "description": "Einrückungstiefe in Leerzeichen für das sortierte XML."
+          "description": "%config.indent.description%"
         },
         "xmlSorter.sortKeys": {
           "type": "string",
           "default": "id,name,key",
-          "description": "Kommagetrennte Prioritätsliste von Attributen zur Unterscheidung gleicher XML-Tags."
+          "description": "%config.sortKeys.description%"
         },
         "xmlSorter.pythonPath": {
           "type": "string",
           "default": "",
-          "description": "Optionaler Pfad zum Python-Interpreter (z. B. /usr/bin/python3 oder C:\\Python\\python.exe). Wenn leer, wird automatisch nach Python im System-PATH gesucht."
+          "description": "%config.pythonPath.description%"
         }
       }
     }
